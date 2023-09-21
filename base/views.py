@@ -8,7 +8,7 @@ from django.db.models import Q
 from .models import Task
 from .forms import TaskForm
 
-# Function-based view for custom login
+# view for custom login
 def custom_login(request):
     if request.user.is_authenticated:
         return redirect('tasks')
@@ -24,7 +24,7 @@ def custom_login(request):
 
     return render(request, 'base/login.html', {'form': form})
 
-# Function-based view for user registration
+# view for user registration
 def register_page(request):
     if request.user.is_authenticated:
         return redirect('tasks')
@@ -41,7 +41,7 @@ def register_page(request):
 
     return render(request, 'base/register.html', {'form': form})
 
-# Function-based view for task list
+# view for task list
 @login_required
 def task_list(request):
     tasks = Task.objects.filter(user=request.user)
@@ -57,13 +57,13 @@ def task_list(request):
         'search_input': search_input,
     })
 
-# Function-based view for task detail
+# view for task detail
 @login_required
 def task_detail(request, pk):
     task = Task.objects.get(pk=pk)
     return render(request, 'base/task.html', {'task': task})
 
-# Function-based view for creating a task
+# view for creating a task
 @login_required
 def task_create(request):
     if request.method == 'POST':
@@ -78,7 +78,7 @@ def task_create(request):
 
     return render(request, 'base/task_form.html', {'form': form})
 
-# Function-based view for updating a task
+# view for updating a task
 @login_required
 def task_update(request, pk):
     task = Task.objects.get(pk=pk)
@@ -93,7 +93,7 @@ def task_update(request, pk):
 
     return render(request, 'base/task_form.html', {'form': form})
 
-# Function-based view for deleting a task
+# view for deleting a task
 @login_required
 def task_delete(request, pk):
     task = Task.objects.get(pk=pk)
